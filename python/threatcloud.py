@@ -1,4 +1,6 @@
+from http.client import REQUEST_HEADER_FIELDS_TOO_LARGE
 import requests
+import json
 
 def getKey():
 	keyfile = '.threatcloud.key'
@@ -6,7 +8,7 @@ def getKey():
 
 	# potential error: FileNotFoundError: [Errno 2] No such file or directory: '.threatcloud.key'
 	with open(keyfile, 'r') as f:
-		key = f.read()
+		key = f.read().rstrip('\n')
 
 	f.close()
 
@@ -22,16 +24,29 @@ def post(address, command, payload):
 def upload_av(address):
 
 	# will need to be an arg
-	filename = "file-sample_100kB.doc"
+	filename = "LoaderDemo4.xlsm"
 
 	address = address + 'upload'
-	payload = { 'request': { "features": ["av"] } }
-	file = { 'request': { "features": ["av"] }, 'file': open(filename, "rb") }
+
+	request = {"request": { "file_name": filename,
+		"te": { "reports": ["pdf", "xml"]} }}
+
+	files = { "file": (open(filename, "rb")), 'request': json.dumps(request)}
+	# payload = { "request": { "features": ["te"], "te": {"reports": ["pdf"] }}}
+	#payload = { "request": { "features": ["te"], "te": {"reports": ["pdf"] }} }
+
+
 
 	key = getKey()
-	request_headers = { 'Authorization': key, 'Content-Type': 'multipart/form-data'}
+	# request_headers = { 'Authorization': key, 'Content-Type': 'multipart/form-data'}
+	request_headers = { 'Authorization': key } 
+	
+	print("POST %s" % address)
+#print("headers: %s " % request_headers)
+	#print("Payload: %s " % payload)
 
-	r = requests.post(address, headers=request_headers, data=payload)
+	#r = requests.post(address, headers=request_headers, data=payload, files=files)
+	r = requests.post(address, headers=request_headers, files=files, verify=False)
 	print(r.status_code)
 	print(r.text)
 
@@ -41,10 +56,10 @@ def quota(address):
 
 
 	address = address + 'quota'
-	print("GET: " + address)
+	print("POST: " + address)
 	key = getKey()
 	request_headers = { 'Authorization': key }
-	r = requests.get(address, headers=request_headers)
+	r = requests.post(address, headers=request_headers)
 	print(r.status_code)
 	print(r.text)
 
@@ -52,7 +67,7 @@ def quota(address):
 def main():
 	address = 'https://te.checkpoint.com/tecloud/api/v1/file/'
 	
-	#quota(address)
+	quota(address)
 	#post(address, 'query', None)
 	#post(address, 'upload', None)
 	#post(address, 'download', None)
