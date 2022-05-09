@@ -1,5 +1,15 @@
 # First upload response
 
+
+Response codes from upload
+
+1002 UPLOAD SUCCESS
+1003 PENDING
+1001 FOUND
+
+
+FileID for download is found the POST upload request when completed in "pdf id" or xml id example somewhere below. The problem is that the time to genereate an id takes longer than the verdict. So you will get UPLOAD SUCCESS with no pdf ID until later when you run same request....
+
 ```json
 
 {
@@ -274,3 +284,4 @@
   }
 }
 ```
+

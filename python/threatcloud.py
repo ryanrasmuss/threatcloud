@@ -55,18 +55,31 @@ def upload(address, filename):
 
 def download(address, fileid):
 
-    address = address + 'download?id=' + fileid
+    address = address + 'download'
 
     print("Sending download request to: %s" % address)
 
-    params = { "id": fileid }
-    r = requests.get(address, params=params)
-
-    print(r.status_code)
     filename = fileid + ".pdf"
 
-    with open(filename, "wb") as report:
+    params = { "id": fileid }
+    key = getKey()
+    request_headers = { 'Authorization': key }
+
+    # https://stackoverflow.com/questions/16694907/download-large-file-in-python-with-requests
+    with requests.get(address, headers=request_headers, params=params, stream=True) as r:
+        r.raise_for_status()
+        with open(filename, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                f.write(chunk)
+    '''
+    r = requests.post(address, headers=request_headers, params=params)
+
+    with open(filename, 'wb') as report:
         report.write(r.content)
+    '''
+
+    print(r.status_code)
+    print(r.raise_for_status())
 
 
 def query(address, filename):
