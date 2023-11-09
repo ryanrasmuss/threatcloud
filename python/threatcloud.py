@@ -37,12 +37,10 @@ def upload(address, filename):
     # payload = { "request": { "features": ["te"], "te": {"reports": ["pdf"] }}}
     #payload = { "request": { "features": ["te"], "te": {"reports": ["pdf"] }} }
 
-
-
     key = getKey()
     # request_headers = { 'Authorization': key, 'Content-Type': 'multipart/form-data'}
-    request_headers = { 'Authorization': key } 
-    
+    request_headers = { 'Authorization': key }
+
     print("POST %s" % address)
 #print("headers: %s " % request_headers)
     #print("Payload: %s " % payload)
@@ -118,7 +116,7 @@ def query(address, filename):
 #   print("Emulation verdict: %s" % combined_verdict)
 
 
-    
+
 
 def quota(address):
 
@@ -141,7 +139,7 @@ def main():
         return None
 
     address = 'https://te.checkpoint.com/tecloud/api/v1/file/'
-    
+
     #quota(address)
     #post(address, 'query', None)
     #post(address, 'upload', None)
@@ -164,7 +162,7 @@ def main():
 
         download(address, filename)
         # filename is actually the ID Lol
-    
+
 
 
 if __name__ == '__main__':
