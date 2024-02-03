@@ -1,22 +1,25 @@
-# First upload response
+# threatcloud.py
 
 Reference: ``https://sc1.checkpoint.com/documents/TPAPI/CP_1.0_ThreatPreventionAPI_APIRefGuide/html_frameset.htm?topic=documents/TPAPI/CP_1.0_ThreatPreventionAPI_APIRefGuide/124153``
 
 
 Response codes from upload
 
-1006 PARTIALLY_FOUND
-1002 UPLOAD SUCCESS
-1003 PENDING
-1001 FOUND
+``1006`` PARTIALLY_FOUND
+
+``1002`` UPLOAD SUCCESS
+
+``1003`` PENDING
+
+``1001`` FOUND
 
 
-I have noticed that sometiems you get a 1006 Code (Partially Found) as it seems to be doing more in-depth analysis of the malware before it generates a report with FileID.
+A 1006 Code (Partially Found) means there emulation is still running. Once emulation is completed ``1001`` there will be a fileID in the response.
 
 Reports are only created if a file is found to be malicious and will have a FileID under the reports field. 
 
 
-FileID for download is found the POST upload request when completed in "pdf id" or xml id example somewhere below. The problem is that the time to genereate an id takes longer than the verdict. So you will get UPLOAD SUCCESS with no pdf ID until later when you run same request....
+# Upload Success
 
 ```json
 
@@ -237,7 +240,10 @@ FileID for download is found the POST upload request when completed in "pdf id" 
 }
 ```
 
-# RESPONSE MALICIOUS WHERE IS PDF REPORT ID? HERE!
+# Response Malicious 
+
+You can find the report IDs below. They are in pdf or xml format. Use these IDs to download the analysis results.
+
 ```json
 200
 {
@@ -293,6 +299,6 @@ FileID for download is found the POST upload request when completed in "pdf id" 
 }
 ```
 
-# How to download report with ID
+# Download
 
 ``HTTP POST: https://te.checkpoint.com/tecloud/api/v1/file/download?id=ef5f38d8-c35e-42fa-b3f1-388e681e18b9``
