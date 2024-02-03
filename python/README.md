@@ -4,12 +4,7 @@
 
 Create a ``.threatcloud.key`` file in the working directory and add your API key to the file.
 
-```
-python3 threatcloud.py quota
-python3 threatcloud.py upload Filename
-python3 threatcloud.py query Filename
-python3 threatcloud download File-Id-From-Upload-Response
-```
+``python3 threatcloud.py query|upload|quota|download file``
 
 API Reference: ``https://sc1.checkpoint.com/documents/TPAPI/CP_1.0_ThreatPreventionAPI_APIRefGuide/html_frameset.htm?topic=documents/TPAPI/CP_1.0_ThreatPreventionAPI_APIRefGuide/124153``
 
