@@ -120,7 +120,6 @@ def query(address, filename):
 
 def quota(address):
 
-
     address = address + 'quota'
     print("POST: " + address)
     key = getKey()
@@ -135,7 +134,7 @@ def main():
     args = len(sys.argv)
 
     if args > 3 or args < 2:
-        print("Usage: python3 threatcloud.py query|upload|quota file")
+        print("Usage: python3 threatcloud.py query|upload|quota|download file")
         return None
 
     address = 'https://te.checkpoint.com/tecloud/api/v1/file/'
@@ -159,12 +158,10 @@ def main():
         upload(address, filename)
 
     if command == 'download':
-
         download(address, filename)
         # filename is actually the ID Lol
 
 
-
 if __name__ == '__main__':
-
     main()
+
