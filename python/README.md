@@ -1,6 +1,17 @@
 # threatcloud.py
 
-Reference: ``https://sc1.checkpoint.com/documents/TPAPI/CP_1.0_ThreatPreventionAPI_APIRefGuide/html_frameset.htm?topic=documents/TPAPI/CP_1.0_ThreatPreventionAPI_APIRefGuide/124153``
+### Usage
+
+Create a ``.threatcloud.key`` file in the working directory and add your API key to the file.
+
+```
+python3 threatcloud.py quota
+python3 threatcloud.py upload Filename
+python3 threatcloud.py query Filename
+python3 threatcloud download File-Id-From-Upload-Response
+```
+
+API Reference: ``https://sc1.checkpoint.com/documents/TPAPI/CP_1.0_ThreatPreventionAPI_APIRefGuide/html_frameset.htm?topic=documents/TPAPI/CP_1.0_ThreatPreventionAPI_APIRefGuide/124153``
 
 
 Response codes from upload
@@ -19,7 +30,7 @@ A 1006 Code (Partially Found) means there emulation is still running. Once emula
 Reports are only created if a file is found to be malicious and will have a FileID under the reports field. 
 
 
-# Upload Success
+### Upload Success
 
 ```json
 
@@ -69,7 +80,7 @@ Reports are only created if a file is found to be malicious and will have a File
 }
 ```
 
-# Pending Response (still being emulated)
+### Pending Response (still being emulated)
 
 ```json
 
@@ -119,7 +130,7 @@ Reports are only created if a file is found to be malicious and will have a File
 }
 ```
 
-# Verdict Response BENIGN
+### Verdict Response BENIGN
 
 ```json
 
@@ -171,7 +182,7 @@ Reports are only created if a file is found to be malicious and will have a File
 
 ```
 
-# Verdict Response MALICIOUS
+### Verdict Response MALICIOUS
 
 ```json
 {
@@ -240,7 +251,7 @@ Reports are only created if a file is found to be malicious and will have a File
 }
 ```
 
-# Response Malicious 
+### Response Malicious 
 
 You can find the report IDs below. They are in pdf or xml format. Use these IDs to download the analysis results.
 
@@ -299,6 +310,6 @@ You can find the report IDs below. They are in pdf or xml format. Use these IDs 
 }
 ```
 
-# Download
+### Download
 
 ``HTTP POST: https://te.checkpoint.com/tecloud/api/v1/file/download?id=ef5f38d8-c35e-42fa-b3f1-388e681e18b9``
