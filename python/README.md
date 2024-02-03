@@ -25,7 +25,7 @@ A 1006 Code (Partially Found) means there emulation is still running. Once emula
 Reports are only created if a file is found to be malicious and will have a FileID under the reports field. 
 
 
-### Upload Success
+### Upload Response
 
 ```json
 
@@ -75,7 +75,7 @@ Reports are only created if a file is found to be malicious and will have a File
 }
 ```
 
-### Pending Response (still being emulated)
+### Query Pending Response (file is being processed by emulation engines)
 
 ```json
 
@@ -125,7 +125,7 @@ Reports are only created if a file is found to be malicious and will have a File
 }
 ```
 
-### Verdict Response BENIGN
+### Query Response with verdict: BENIGN
 
 ```json
 
@@ -177,7 +177,7 @@ Reports are only created if a file is found to be malicious and will have a File
 
 ```
 
-### Verdict Response MALICIOUS
+### Query Resposne with verdict MALICIOUS
 
 ```json
 {
@@ -246,9 +246,9 @@ Reports are only created if a file is found to be malicious and will have a File
 }
 ```
 
-### Response Malicious 
+### Upload Response after completed emulation
 
-You can find the report IDs below. They are in pdf or xml format. Use these IDs to download the analysis results.
+You can find the report IDs in the upload response below. They are in pdf or xml format. Use these IDs to download the analysis results. These IDs take time to generate after a successful malicious verdict from the query response. 
 
 ```json
 200
@@ -305,6 +305,8 @@ You can find the report IDs below. They are in pdf or xml format. Use these IDs 
 }
 ```
 
-### Download
+### Download 
+
+The files are in pdf or xml format. 
 
 ``HTTP POST: https://te.checkpoint.com/tecloud/api/v1/file/download?id=ef5f38d8-c35e-42fa-b3f1-388e681e18b9``
