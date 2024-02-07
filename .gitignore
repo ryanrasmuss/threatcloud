@@ -1,3 +1,7 @@
 *.doc
 *.swp
-.*
+.git/
+.DS_Store
+.threatcloud.key
+*.pdf
+*.json
