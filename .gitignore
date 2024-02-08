@@ -1,3 +1,7 @@
 *.doc
 *.swp
-.*
+*.key
+*.pdf
+*.json
+*.exe
+*.DS_Store
